@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import { mkdirSync } from "fs";
 import { DataExporter } from "./DataExporter";
 import { UserData } from "../data/UserData";
 
@@ -24,6 +25,7 @@ export class XmlExporter extends DataExporter {
   }
 
   protected async save(): Promise<void> {
+    mkdirSync("./dist", { recursive: true }); // ✅ створюємо папку, якщо немає
     await fs.writeFile("./dist/users.xml", this.result, "utf-8");
   }
 }

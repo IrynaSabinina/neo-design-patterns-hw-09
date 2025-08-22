@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import { promises as fs, mkdirSync } from "fs";
 import { DataExporter } from "./DataExporter";
 import { UserData } from "../data/UserData";
 
@@ -12,6 +12,7 @@ export class CsvExporter extends DataExporter {
   }
 
   protected async save(): Promise<void> {
+    mkdirSync("./dist", { recursive: true });
     await fs.writeFile("./dist/users.csv", this.result, "utf-8");
   }
 }
